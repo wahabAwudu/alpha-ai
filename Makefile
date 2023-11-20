@@ -1,17 +1,18 @@
-install: ## Install dependencies
+venv:
+	@echo "Create a new Virtual environment"
+	@python3 -m venv venv
+
+activate:
+	@echo "Activate virtual environment"
+	@source venv/bin/activate
+
+install:
 	@echo "Install dependencies"
-	@poetry install --no-root
+	@pip install -r requirements.txt
 
-prep: ## prepare the script to avoid permission error [13] from poetry
-	@echo "Setting required permissions"
-	@chmod +x main.py
-	@echo "Done!"
-
-run: ## Run the main.py script
-	@echo "Activating poetry virtual environment"
-	@poetry shell
-	@echo "Running main.py script"
-	@poetry run python3 main.py
+run:
+	@echo "Running application..."
+	@streamlit run main.py
 
 .PHONY: help
 .DEFAULT_GOAL := help
